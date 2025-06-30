@@ -2,6 +2,7 @@ import os
 from dotenv import load_dotenv
 from .factory import CommandFactory
 from .facade import HistoryFacade
+from .logger import logger
 
 def main():
     # Load environment variables from .env file if present
@@ -14,30 +15,43 @@ def main():
     factory = CommandFactory()
     history = HistoryFacade(history_file)
 
-    print("Welcome to the Advanced Calculator!")
-    print("Available commands: add, subtract, multiply, divide")
-    print("Type commands like (ex: add 2 3)")
+    logger.info("Calculator REPL started")
+
+    print("Jorge Sanchez")
+    print("IS218-450")
+    print("Midterm Project")
+    print("June 29th, 2025")
+    print("\n---------------------------------------------------------\n")
+    print("Advanced Calculator")
+    print("Available Commands List \n ----- \n add \n subtract \n multiply \n divide \n -----")
+    print("Type commands like \n (ex: add 2 3) \n (ex: divide 45 9) \n (ex: subtract 1007 911")
+    print("\n---------------------------------------------------------\n")
     print("Type 'history' to see past calculations.")
     print("Type 'clear' to clear calculator history.")
     print("Type 'exit' to close the CLI")
+    print("\n---------------------------------------------------------\n")
 
     while True:
         user_input = input("> ").strip()
 
         if user_input.lower() == "exit":
-            print("Goodbye! Have a good one!")
+            print("Calculator Shutdown")
+            logger.info("exited calculator")
             break
 
         elif user_input.lower() == "history":
             print("\nYour past calculations:")
             print(history.show_history())
+            logger.info("displayed history")
 
         elif user_input.lower() == "clear":
             history.clear_history()
-            print("History wiped clean. Fresh start!")
+            print("History Cleared")
+            logger.info("Cleared history")
 
         else:
             try:
+                logger.info(f"User command: {user_input}")
                 # Split user input into parts
                 parts = user_input.split()
 
@@ -52,12 +66,15 @@ def main():
                 # Do the math!
                 result = command.execute(x, y)
                 print(f"Result: {result}")
+                logger.info(f"Calculation result: {result}")
 
                 # Log it in history
                 history.add_calculation(command_name.capitalize(), x, y, result)
+                logger.info(f"Added to history: {command_name.capitalize()} {x} {y} = {result}")
 
             except Exception as e:
                 print(f"Oops! Something went wrong: {e}")
+                logger.error(f"Error processing input '{user_input}': {e}")
 
 if __name__ == "__main__":
     main()
