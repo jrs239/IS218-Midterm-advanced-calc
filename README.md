@@ -23,10 +23,10 @@ link: https://drive.google.com/file/d/1i7O36AofpOzhrvar9dfK-rCnHd5feoIG/view?usp
 ## How to Run
 Clone the repo, install requirements, set up your `.env` (there’s an example file for that):
 
-```bash
-pip install -r requirements.txt
+`bash`
+`pip install -r requirements.txt`
 
-python -m src.calculator.main```
+`python -m src.calculator.main`
 
 -------------------------------------------------------------------------------------------------
 
@@ -83,6 +83,6 @@ Division by zero
 
 Run them locally with:
 
-```bash
-PYTHONPATH=src pytest```
+`bash`
+`PYTHONPATH=src pytest`
 
