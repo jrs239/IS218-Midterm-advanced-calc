@@ -16,6 +16,10 @@ I wanted to see what real Python design patterns looked like, how to keep the pr
 
 ---
 
+## Video Snippet
+
+link: https://drive.google.com/file/d/1i7O36AofpOzhrvar9dfK-rCnHd5feoIG/view?usp=sharing
+
 ## How to Run
 Clone the repo, install requirements, set up your `.env` (there’s an example file for that):
 
