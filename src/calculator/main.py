@@ -24,6 +24,12 @@ def main():
     print("\n---------------------------------------------------------\n")
     print("Advanced Calculator")
     print("Available Commands List \n ----- \n add \n subtract \n multiply \n divide \n -----")
+# Print plugins too
+    if factory.plugins:
+        for plugin in factory.plugins:
+            print(f" {plugin}")
+
+    print(" -----")
     print("Type commands like \n (ex: add 2 3) \n (ex: divide 45 9) \n (ex: subtract 1007 911")
     print("\n---------------------------------------------------------\n")
     print("Type 'history' to see past calculations.")
@@ -57,20 +63,19 @@ def main():
 
                 # First word is command name, rest are operands
                 command_name = parts[0]
-                x = float(parts[1])
-                y = float(parts[2])
+                args = [float(p) for p in parts[1:]]
 
                 # Let the factory handle picking the right command
                 command = factory.get_command(command_name)
 
                 # Do the math!
-                result = command.execute(x, y)
+                result = command.execute(*args)
                 print(f"Result: {result}")
                 logger.info(f"Calculation result: {result}")
 
                 # Log it in history
-                history.add_calculation(command_name.capitalize(), x, y, result)
-                logger.info(f"Added to history: {command_name.capitalize()} {x} {y} = {result}")
+                history.add_calculation(command_name.capitalize(), *args, result=result)
+                logger.info(f"Added to history: {command_name.capitalize()} {args} = {result}")
 
             except Exception as e:
                 print(f"Oops! Something went wrong: {e}")

@@ -15,14 +15,14 @@ class HistoryManager:
 		if os.path.exists(history_file):
 			self.history = pd.read_csv(history_file)
 		else:
-			self.history = pd.DataFrame(columns=['Operation','x','y','answer'])
+			self.history = pd.DataFrame(columns=['Operation','Inputs','Result'])
 
-	def add_entry(self, operation, x, y, result):
+	def add_entry(self, operation, *args, result):
+		input_str = ', '.join(str(arg) for arg in args)
 		new_row = pd.DataFrame([{
 			'Operation': operation,
-			'x': x,
-			'y': y,
-			'answer':result
+			'Inputs': input_str,
+			'Result': result
 		}])
 		self.history = pd.concat([self.history, new_row], ignore_index=True)
 
@@ -30,7 +30,7 @@ class HistoryManager:
 		self.history.to_csv(self.history_file, index=False)
 
 	def clear_history(self):
-		self.history = pd.DataFrame(columns=['Operation', 'x', 'y', 'answer'])
+		self.history = pd.DataFrame(columns=['Operation', 'Inputs', 'Result'])
 		self.save_history()
 
 	def get_history(self):
