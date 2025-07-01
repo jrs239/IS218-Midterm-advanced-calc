@@ -26,7 +26,7 @@ Clone the repo, install requirements, set up your `.env` (there’s an example f
 ```bash
 pip install -r requirements.txt
 
-python -m src.calculator.main
+python -m src.calculator.main```
 
 -------------------------------------------------------------------------------------------------
 
@@ -84,5 +84,5 @@ Division by zero
 Run them locally with:
 
 ```bash
-PYTHONPATH=src pytest
+PYTHONPATH=src pytest```
 

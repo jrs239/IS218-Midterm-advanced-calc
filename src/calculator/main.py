@@ -75,7 +75,7 @@ def main():
 
                 # Log it in history
                 history.add_calculation(command_name.capitalize(), *args, result=result)
-                logger.info(f"Added to history: {command_name.capitalize()} {args} = {result}")
+                logger.info(f"Added to history: {command_name.capitalize()} {', '.join(map(str, args))} = {result}")
 
             except Exception as e:
                 print(f"Oops! Something went wrong: {e}")
